@@ -1,0 +1,52 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:7946",
+      "sslPort": 44310
+    }
+  },
+  "profiles": {
+    "PortfolioSite": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SENDGRID_API_KEY": "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"
+      },
+      "applicationUrl": "https://localhost:7032;http://localhost:5032",
+      "dotnetRunMessages": true
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SENDGRID_API_KEY": "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",
+        "ASPNETCORE_DETAILEDERRORS": "true"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "SENDGRID_API_KEY": "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"
+      },
+      "publishAllPorts": true,
+      "useSSL": true
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:7032",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:7032;http://localhost:5032",
+        "SENDGRID_API_KEY": "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"
+      },
+      "distributionName": ""
+    }
+  }
+}

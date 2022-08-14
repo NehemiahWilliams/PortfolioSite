@@ -1,0 +1,85 @@
+﻿@using PortfolioSite.Data.Models
+@inject IEmailService emailService
+@inject IToastService toastService
+
+
+<EditForm Model="contactModel" id="contact-form" OnValidSubmit="@(async () => await HandleValidSubmit())" class="text-muted">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="card card-contact card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 pr-2">
+                    <label>First name</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
+                        </div>
+                        <InputText id="first-name-input" @bind-Value="contactModel.FirstName" class="form-control" placeholder="First Name..." />
+                    </div>
+                </div>
+                <div class="col-md-6 pl-2">
+                    <div class="form-group">
+                        <label>Last name</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="now-ui-icons text_caps-small"></i></span>
+                            </div>
+                            <InputText id="last-name-input" @bind-Value="contactModel.LastName" class="form-control" placeholder="Last Name..." />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Company name</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="now-ui-icons business_badge"></i></span>
+                    </div>
+                    <InputText id="company-name-input" @bind-Value="contactModel.CompanyName" class="form-control" placeholder="Company Name Here..." />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email address</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
+                    </div>
+                    <InputText id="email-address-input" @bind-Value="contactModel.Email" class="form-control" placeholder="Email Here..." />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Your message</label>
+                <InputTextArea id="input-text-area" @bind-Value="contactModel.Message" class="form-control" placeholder="Type your message here..." rows="6" />
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary btn-round pull-left">Send Message</button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+
+
+
+
+@code {
+    private ContactModel contactModel = new ContactModel();
+    private bool success = false;
+    private string messageSent = string.Empty;
+
+    private async Task HandleValidSubmit()
+    {
+        var result = await emailService.SendEmail(contactModel.FirstName + contactModel.LastName, contactModel.Email, "New Contact", contactModel.Message);
+        if (result.IsSuccessStatusCode)
+        {
+            messageSent = await result.Body.ReadAsStringAsync();
+            contactModel = new ContactModel();
+            toastService.ShowSuccess("I have received your email and I'll respond as soon as I can.", "Thanks for reaching out!");
+        }
+        else
+        {
+            toastService.ShowError("Something went wrong. Please try again or email me at nehemiahwilliams80@gmail.com", "Sorry!");
+        }
+    }
+}
