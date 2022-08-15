@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject IJSRuntime jsRuntime
 
 <div class="wrapper">
     <div class="page-header page-header-small">
@@ -26,46 +27,53 @@
             <div class="row">
                 <div class="col-md-8 ml-auto mr-auto text-center">
                     <h2 class="title">About Me</h2>
-                    <p class="description">
+                    <p>
                         I enjoy hiking, fishing, and camping with my pup on the weekends.
                         I love being a developer but I find it refreshing to unplug when I can. After work you can find
-                        me at the boxing gym, learning a new skill, or on the couch with the pup. Some of the technologies that I like to
+                        me at the boxing gym, learning a new skill, or on the couch with the pup.
+                    </p>
+                    <p>
+                        Some of the technologies that I like to
                         use include .NET, Blazor, Bootstrap, Azure, and Docker. I've built internal toolings and interfaces,
-                        public facing websites, web APIs, and windows services. The thing I enjoy most about being a 
+                        public facing websites, web APIs, and windows services. The thing I enjoy most about being a
                         software engineer is the opportunity to learn new things with the ever-changing world of technology.
                     </p>
                 </div>
             </div>
             <div class="separator separator-primary"></div>
-            <div class="section-story-overview" style="padding-bottom: 0px">
+            <div class="section-story-overview" style="padding-bottom: 0px; padding-top: 1rem">
                 <div class="row">
-                    <div class="col-md-6">
-                        <!-- First image on the left side -->
-                        <div class="image-container image-left" style="background-image: url('../assets/img/docker-dashboard.png')">
-                            <p class="blockquote blockquote-primary">
-                                "The best way to learn is to teach."
-                                <br>
-                                <br>
-                                <small>- Frank Oppenheimer</small>
-                            </p>
+                    @if (!IsMobile)
+                    {
+                        <div class="col-md-6">
+                            <!-- First image on the left side -->
+                            <div class="image-container image-left" style="background-image: url('../assets/img/docker-dashboard.png')">
+                                <p class="blockquote blockquote-primary">
+                                    "The best way to learn is to teach."
+                                    <br>
+                                    <br>
+                                    <small>- Frank Oppenheimer</small>
+                                </p>
+                            </div>
+                            <!-- Second image on the left side of the article -->
+                            <div class="image-container image-left-bottom img-fluid" style="background-image: url('../assets/img/blazor.png')"></div>
                         </div>
-                        <!-- Second image on the left side of the article -->
-                        <div class="image-container image-left-bottom" style="background-image: url('../assets/img/bg24.jpg')"></div>
-                    </div>
-                    <div class="col-md-5">
+                    }
+                    <div class="col-md-5" style="padding-top: 1rem">
                         <!-- First image on the right side, above the article -->
-                        <div class="image-container image-right img-fluid" style="background-image: url('../assets/img/dotnet-logo.png')"></div>
-                        <h3>So what does the new record for the lowest level of winter ice actually mean</h3>
+                        <div class="image-container image-right img-fluid" style="background-image: url('../assets/img/dotnet-logo.png'); padding-bottom: 1rem"></div>
+                        <h3 style="padding-top: 2rem">just another blog</h3>
                         <p>
-                            If you want to look at some of the implementations of these technologies,
-                            the source code is available on my github for this website. I've used Blazor 
+                            If you want to look at some of the implementations of the technologies I listed above,
+                            the source code is available on my github for this website. I've used Blazor
                             as the framwork to build this site, docker for the infrastructure, and Azure for the hosting.
                         </p>
-                        <p>
+                        <!--If you're reading this then know this will be coming soon XD-->
+@*                        <p>
                             If you want to stay up to date with articles and tutorials on some of these technologies,
                             sign up here to receive alerts on new posting. I'll never spam you or sell your information
                             to anyone and you can unscubscribe at any time.
-                        </p>
+                        </p>*@
                         <p>
                             If you are looking to work with me, fill out the contact card below or reach out to me on linkeden. You can also dowload a copy of
                             my resume by clicking here.
@@ -75,5 +83,17 @@
             </div>
         </div>
     </div>
-    <Contact/>
+    <Contact IsMobile="IsMobile"/>
 </div>
+
+
+@code {
+    bool IsMobile;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        IsMobile = await jsRuntime.InvokeAsync<bool>("isDevice");
+        StateHasChanged();
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

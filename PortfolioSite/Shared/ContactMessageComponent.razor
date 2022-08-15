@@ -6,8 +6,8 @@
 <EditForm Model="contactModel" id="contact-form" OnValidSubmit="@(async () => await HandleValidSubmit())" class="text-muted">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="card card-contact card">
-        <div class="card-body">
+    <div class="@mobileCss">
+        <div class="@mobileFormBodyCss">
             <div class="row">
                 <div class="col-md-6 pr-2">
                     <label>First name</label>
@@ -64,6 +64,11 @@
 
 
 @code {
+    [Parameter]
+    public bool IsMobile { get; set; }
+    
+    private string mobileCss => IsMobile ? string.Empty : "card card-contact card";
+    private string mobileFormBodyCss => IsMobile ? string.Empty : "card-body";
     private ContactModel contactModel = new ContactModel();
     private bool success = false;
     private string messageSent = string.Empty;

@@ -5,16 +5,13 @@
     <h2 class="title">Get in Touch</h2>
     <h4 class="description">Want to work with me? Send me a message and I'll reach out to you shortly!</h4>
     <div class="space">
-        <ContactMessageComponent />
+        <ContactMessageComponent IsMobile="IsMobile"/>
     </div>
 </div>
 
 @code{
-
-
-
-    
-    
+    [Parameter]
+    public bool IsMobile { get; set; }
 }
 
 
