@@ -23,15 +23,15 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://mcr.microsoft.com/
-        username: ${{ secrets.AzureAppService_ContainerUsername_d86c598a6b884042947f0952ea1fc9a6 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_334a88e4e25f4d00943c9f4202f9741f }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_5c14e3e1658949dc9777a9a4e4337050 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_07e201f059d54d51ad467372b94294e2 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_d86c598a6b884042947f0952ea1fc9a6 }}/appsvc/staticsite:${{ github.sha }}
-        file: ./PortforlioSite/Dockerfile
+        tags: mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_5c14e3e1658949dc9777a9a4e4337050 }}/appsvc/staticsite:${{ github.sha }}
+        file: ./Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'nehemiahportfolio'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e644986ef9a14f4b82181c32341630d4 }}
-        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_d86c598a6b884042947f0952ea1fc9a6 }}/appsvc/staticsite:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_97d1d6296ef9409cb9ef45cb402932fc }}
+        images: 'mcr.microsoft.com/${{ secrets.AzureAppService_ContainerUsername_5c14e3e1658949dc9777a9a4e4337050 }}/appsvc/staticsite:${{ github.sha }}'
