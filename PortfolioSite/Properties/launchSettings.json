@@ -23,7 +23,6 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "SENDGRID_API_KEY": "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",
         "ASPNETCORE_DETAILEDERRORS": "true"
       }
     },
@@ -31,9 +30,6 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
-      "environmentVariables": {
-        "SENDGRID_API_KEY": "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"
-      },
       "publishAllPorts": true,
       "useSSL": true
     },
