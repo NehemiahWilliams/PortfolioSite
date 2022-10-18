@@ -1,0 +1,33 @@
+﻿<div class="card card-plain card-blog">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card-image">
+                <img class="img img-raised rounded" src="@ImagePath">
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3 class="card-title">
+                <a href="@BlogLink">@Title</a>
+            </h3>
+            <p class="card-description">
+                @Description<a href="@BlogLink"> Read More </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string? ImagePath { get; set; }
+
+    [Parameter]
+    public string? Description { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+    
+    [Parameter]
+    public string? BlogLink { get; set; }
+
+}
