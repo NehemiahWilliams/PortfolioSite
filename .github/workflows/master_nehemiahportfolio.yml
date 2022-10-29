@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'nehemiahportfolio'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E3B6D8EC0909406C90C3BCCAC468EB84 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9B9C5DE717B1498C947F27E69B04DC51 }}
           package: .
