@@ -15,8 +15,8 @@ namespace PortfolioSite.Data.Services
         public async Task<Response> SendEmail(string fromName, string fromEmail, string subject, string body)
         {
             var client = new SendGridClient(new SendGridClientOptions{ApiKey = EnvironmentVariables.SendGridApiKey, HttpErrorAsException = true });
-            var to = new EmailAddress("nwil215@wgu.edu", "Nehemiah");
-            var from = new EmailAddress("nehemiah@madladmiah.dev", "Nehemiah");
+            var to = new EmailAddress("nehemiah@madladmiah.dev", "Nehemiah");
+            var from = new EmailAddress("nehemiahwilliams80@gmail.com", "Nehemiah");
             var plainTextContent = body;
             var htmlContent = $"<div> Email: {fromEmail} <br> Name: {fromName} <br> Message: {body}</div>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject + fromName, plainTextContent, htmlContent);
